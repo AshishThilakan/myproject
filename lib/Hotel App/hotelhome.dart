@@ -1,8 +1,9 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import '../Assignment/WelcomePage.dart';
+import 'hoteldetails.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -11,10 +12,10 @@ void main() {
 }
 
 final List rooms = [
+  {"image": "assets/icons/hotel3.jpg", "tittle": "Beautiful Room"},
   {"image": "assets/icons/hotel1.jpg", "tittle": "Awesome room near Thrissur"},
   {"image": "assets/icons/hotel2.jpg", "tittle": "Peaceful Room"},
-  {"image": "assets/icons/hotel3.jpg", "tittle": "Beautiful Room"},
-  {"image": "assets/icons/hotel4.jpg", "tittle": "Vintage room near Kochi"},
+  {"image": "assets/icons/hotel4.jpg", "tittle": "Vintage room near Thrissur"},
 ];
 
 class HotelHomePage extends StatelessWidget {
@@ -47,7 +48,7 @@ class HotelHomePage extends StatelessWidget {
           flexibleSpace: ListView(
             children: <Widget>[
               const SizedBox(height: 70.0,),
-              const Text("Type your loaction",
+              const Text("Type your location",
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20.0
@@ -62,7 +63,9 @@ class HotelHomePage extends StatelessWidget {
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: "Thrissur, Kerala",border: InputBorder.none,
-                    icon: IconButton(onPressed: () { },
+                    icon: IconButton(onPressed: () {
+
+                    },
                         icon: const Icon(Icons.search))
                   ),
                 ),
@@ -85,68 +88,75 @@ class HotelHomePage extends StatelessWidget {
 
 Widget _buildRooms(BuildContext context, int index) {
   var room = rooms[index % rooms.length];
-  return Container(
-    margin: const EdgeInsets.all(20),
-    child: ClipRRect(
-      borderRadius: BorderRadius.circular(5),
-      child: Container(
+  return GestureDetector(
+    onTap: () {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context){
+        return HotelDetails();
+      }));
+    },
+    child: Container(
+      margin: const EdgeInsets.all(20),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(5),
+        child: Container(
 
-        child: Material(
-         elevation: 5,
-            borderRadius: BorderRadius.circular(5),
-          color: Colors.white,
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Stack(
-              children: [
-            Image.asset(room['image'],width: MediaQuery.of(context).size.width*0.9,fit: BoxFit.cover),
-                Positioned(
-                  right: 10,
-                    top: 10,
-                    child: Icon(Icons.star,
-                color: Colors.grey.shade800,)),
-                const Positioned(
-                    left: 10,top: 10,
-                    child: Icon(Icons.star_border,
-                color: Colors.white,size: 24,)),
-                Positioned(
-                  bottom: 20,
+          child: Material(
+           elevation: 5,
+              borderRadius: BorderRadius.circular(5),
+            color: Colors.white,
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Stack(
+                children: [
+              Image.asset(room['image'],width: MediaQuery.of(context).size.width*0.9,fit: BoxFit.cover),
+                  Positioned(
                     right: 10,
-                    child: Container(
-                  padding: const EdgeInsets.all(10),color: Colors.white,
-                  child: const Text("\$40"),
-                ))
-              ],
-            ),
-            Container(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(room['tittle'],style: const TextStyle(fontSize: 18,
-                  fontWeight: FontWeight.bold),),
-                  const SizedBox(height: 10,),
-                  const Text("Thrissur, Kerala"),
-                  const SizedBox(height: 10,),
-                  Row(crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const <Widget> [
-                      Icon(Icons.star,color: Colors.green,),
-                      Icon(Icons.star,color: Colors.green,),
-                      Icon(Icons.star,color: Colors.green,),
-                      Icon(Icons.star,color: Colors.green,),
-                      Icon(Icons.star,color: Colors.green,),
-                      SizedBox(width: 5,),
-                      Text("(220 Reviews)",style: TextStyle(color: Colors.grey),)
-                    ],
-                  )
+                      top: 10,
+                      child: Icon(Icons.star,
+                  color: Colors.grey.shade800,)),
+                  const Positioned(
+                      left: 10,top: 10,
+                      child: Icon(Icons.star_border,
+                  color: Colors.white,size: 24,)),
+                  Positioned(
+                    bottom: 20,
+                      right: 10,
+                      child: Container(
+                    padding: const EdgeInsets.all(10),color: Colors.white,
+                    child: const Text("\$40"),
+                  ))
                 ],
               ),
-            )
-          ],),
+              Container(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(room['tittle'],style: const TextStyle(fontSize: 18,
+                    fontWeight: FontWeight.bold),),
+                    const SizedBox(height: 10,),
+                    const Text("Thrissur, Kerala"),
+                    const SizedBox(height: 10,),
+                    Row(crossAxisAlignment: CrossAxisAlignment.center,
+                      children: const <Widget> [
+                        Icon(Icons.star,color: Colors.green,),
+                        Icon(Icons.star,color: Colors.green,),
+                        Icon(Icons.star,color: Colors.green,),
+                        Icon(Icons.star,color: Colors.green,),
+                        Icon(Icons.star,color: Colors.green,),
+                        SizedBox(width: 5,),
+                        Text("(220 Reviews)",style: TextStyle(color: Colors.grey),)
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ],),
+          ),
         ),
       ),
-    ),
 
+    ),
   );
 }
 

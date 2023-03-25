@@ -8,8 +8,8 @@ void main() {
   runApp(MaterialApp(
     home: WhatsApp(),
     theme: ThemeData(
-        colorScheme:
-            ColorScheme.fromSwatch().copyWith(primary: const Color(0xFF128C7E))),
+        colorScheme: ColorScheme.fromSwatch()
+            .copyWith(primary: const Color(0xFF128C7E))),
     debugShowCheckedModeBanner: false,
   ));
 }
